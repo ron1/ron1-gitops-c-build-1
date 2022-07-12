@@ -12,7 +12,7 @@ spec:
     kind: '*'
   description: argo-workflows project
   destinations:
-  - namespace: 'argo-workflows'
+  - namespace: 'argo'
     server: '*'
   - server: https://kubernetes.default.svc
     namespace: argocd
