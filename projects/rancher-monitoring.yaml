@@ -13,7 +13,11 @@ spec:
   description: rancher-monitoring project
   destinations:
   - server: '*'
+    namespace: cattle-dashboards
+  - server: '*'
     namespace: cattle-monitoring-system
+  - server: '*'
+    namespace: kube-system
   - server: '*'
     namespace: default
   - server: https://kubernetes.default.svc
