@@ -4,42 +4,36 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: PruneLast=true
     argocd.argoproj.io/sync-wave: "-2"
-  name: rancher-monitoring
+  name: cert-manager
   namespace: argocd
 spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
-  description: rancher-monitoring project
+  description: cert-manager project
   destinations:
   - server: '*'
-    namespace: cattle-dashboards
-  - server: '*'
-    namespace: cattle-monitoring-system
-  - server: '*'
-    namespace: kube-system
-  - server: '*'
-    namespace: default
+    namespace: cert-manager
   - server: https://kubernetes.default.svc
     namespace: argocd
   namespaceResourceWhitelist:
   - group: '*'
     kind: '*'
   sourceRepos:
-  - 'https://github.com/ron1/ron1-rancher-monitoring-gitops.git'
+  - 'https://github.com/ron1/ron1-cert-manager-gitops.git'
 
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "2000"
-  name: rancher-monitoring
+    argocd.argoproj.io/sync-wave: "3000"
+  name: cert-manager
   namespace: argocd
 spec:
-  project: rancher-monitoring
+  project: cert-manager
   source:
-    repoURL: 'https://github.com/ron1/ron1-rancher-monitoring-gitops.git'
+    repoURL: 'https://github.com/ron1/ron1-cert-manager-gitops.git'
     path: applicationsets
     targetRevision: HEAD
   destination:
