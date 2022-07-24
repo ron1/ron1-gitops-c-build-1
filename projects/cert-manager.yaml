@@ -14,6 +14,8 @@ spec:
   destinations:
   - server: '*'
     namespace: cert-manager
+  - server: '*'
+    namespace: kube-system
   - server: https://kubernetes.default.svc
     namespace: argocd
   namespaceResourceWhitelist:
