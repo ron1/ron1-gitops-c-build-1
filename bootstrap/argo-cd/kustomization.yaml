@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 configMapGenerator:
-- behavior: merge
+- name: argocd-cm
+  behavior: merge
   literals:
   - |
     repository.credentials=- passwordSecret:
@@ -23,8 +26,57 @@ configMapGenerator:
       end
     end
     return hs
-  name: argocd-cm
-kind: Kustomization
+  - |
+    resource.customizations.health.cert-manager.io_Certificate=hs = {}
+    if obj.status ~= nil then
+      if obj.status.conditions ~= nil then
+        for i, condition in ipairs(obj.status.conditions) do
+          if condition.type == "Issuing" and condition.status == "True" then
+            hs.status = "Progressing"
+            hs.message = condition.message
+            return hs
+          end
+          if condition.type == "Ready" and condition.status == "False" then
+            hs.status = "Degraded"
+            hs.message = condition.message
+            return hs
+          end
+          if condition.type == "Ready" and condition.status == "True" then
+            hs.status = "Healthy"
+            hs.message = condition.message
+            return hs
+          end
+        end
+      end
+    end
+
+    hs.status = "Progressing"
+    hs.message = "Waiting for certificate"
+    return hs
+  - |
+    resource.customizations.health.cert-manager.io_Issuer=hs = {}
+    if obj.status ~= nil then
+      if obj.status.conditions ~= nil then
+        for i, condition in ipairs(obj.status.conditions) do
+          if condition.type == "Ready" and condition.status == "False" then
+            hs.status = "Degraded"
+            hs.message = condition.message
+            return hs
+          end
+          if condition.type == "Ready" and condition.status == "True" then
+            hs.status = "Healthy"
+            hs.message = condition.message
+            return hs
+          end
+        end
+      end
+    end
+
+    hs.status = "Progressing"
+    hs.message = "Initializing issuer"
+    return hs
+
 namespace: argocd
+
 resources:
 - github.com/argoproj-labs/argocd-autopilot/manifests/base?ref=v0.4.2

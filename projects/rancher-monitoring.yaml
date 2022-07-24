@@ -34,6 +34,8 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2000"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
   name: rancher-monitoring
   namespace: argocd
 spec:

@@ -30,6 +30,8 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3000"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
   name: cert-manager
   namespace: argocd
 spec:
