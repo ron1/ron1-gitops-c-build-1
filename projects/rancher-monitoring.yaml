@@ -42,7 +42,8 @@ spec:
   project: rancher-monitoring
   source:
     repoURL: 'https://github.com/ron1/ron1-rancher-monitoring-gitops.git'
-    path: applicationsets
+#    path: applicationsets
+    path: apps
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
