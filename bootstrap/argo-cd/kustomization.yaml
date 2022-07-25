@@ -5,6 +5,7 @@ configMapGenerator:
 - name: argocd-cm
   behavior: merge
   literals:
+  - kustomize.buildOptions="--enable-helm"
   - |
     repository.credentials=- passwordSecret:
         key: git_token
