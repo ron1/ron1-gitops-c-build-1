@@ -1,0 +1,11 @@
+cluster-template:
+  # cluster specific values
+  cluster:
+    # specify cluster name
+    name: "ckshare-build-3"
+
+    # specify cluster labels
+    labels:
+      environmentId: dev
+
+  kubernetesVersion: "v1.23.6+rke2r2"

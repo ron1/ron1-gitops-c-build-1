@@ -1,0 +1,28 @@
+cluster-template:
+  # cluster specific values
+  cluster:
+    # specify cluster name
+    name: ""
+
+    # specify cluster labels
+    labels: {}
+
+  # specify cloud provider, options are amazonec2, digitalocean, azure, vsphere or custom
+  cloudprovider: "custom"
+
+  kubernetesVersion: ""
+
+  # general RKE options
+  rke:
+    # enable local auth endpoint
+    localClusterAuthEndpoint:
+      enabled: true
+    # specify fqdn of local access endpoint
+    # fqdn: foo.bar.example
+    # specify cacert of local access endpoint
+    # caCerts: ""
+
+  # specify user principal ids to be assiged as cluster members
+  # clusterMembers:
+  # - principalName: "local://u-z8zl5"
+  #   roleTemplateName: "cluster-member"

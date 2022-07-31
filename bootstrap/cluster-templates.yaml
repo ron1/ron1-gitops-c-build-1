@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: cluster-templates
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ron1/ron1-gitops-c-build-1.git
+      revision: HEAD
+      directories:
+      - path: "bootstrap/cluster-templates/rke2-cluster-template/0.0.1/clusters/*"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: argocd-autopilot
+        app.kubernetes.io/name: cluster-templates-{{path.basename}}
+        appset: cluster-templates
+      annotations:
+        version: '{{path[3]}}'
+      name: cluster-templates-{{path.basename}}
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - clusters/{{path.basename}}/values.yaml
+        repoURL: https://github.com/ron1/ron1-gitops-c-build-1.git
+        path: '{{path}}/../..'
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          selfHeal: true

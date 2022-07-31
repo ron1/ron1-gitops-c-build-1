@@ -1,0 +1,6 @@
+dependencies:
+- name: cluster-template
+  repository: https://raw.githubusercontent.com/rancher/cluster-template-examples/main/
+  version: 0.0.1
+digest: sha256:477362066ea0e905abeb0f6405de4f356a298fca633513d3ec2562cde4c8b5f4
+generated: "2022-07-31T07:07:45.758524829-04:00"
