@@ -2,7 +2,7 @@ cluster-template:
   # cluster specific values
   cluster:
     # specify cluster name
-    name: "ckshare-build-3"
+    name: "c-build-3"
 
     # specify cluster labels
     labels:
