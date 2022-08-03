@@ -30,7 +30,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "3000"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: kyverno
+  name: kyverno-app
   namespace: argocd
 spec:
   project: kyverno
