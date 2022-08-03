@@ -102,4 +102,4 @@ patches:
       labels:
         argocd.argoproj.io/secret-type: cluster
         clusterId: in-cluster-local
-
+        environmentId: dev
