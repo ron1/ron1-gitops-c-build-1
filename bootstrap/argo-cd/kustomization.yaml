@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-- github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.4.8
+- github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.4.11
 #- github.com/argoproj-labs/argocd-autopilot/manifests/base?ref=v0.4.2
 
 configMapGenerator:
@@ -102,5 +102,6 @@ patches:
       labels:
         argocd.argoproj.io/secret-type: cluster
         clusterId: in-cluster-local
+        clusterName: c-build-1
         environmentId: dev
         kyverno: dev
