@@ -32,7 +32,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "4000"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: argo-workflows
+  name: argo-workflows-app
   namespace: argocd
 spec:
   project: argo-workflows
