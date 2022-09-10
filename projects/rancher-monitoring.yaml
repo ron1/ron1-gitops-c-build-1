@@ -36,14 +36,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "2000"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: rancher-monitoring
+  name: rancher-monitoring-app
   namespace: argocd
 spec:
   project: rancher-monitoring
   source:
     repoURL: 'https://github.com/ron1/ron1-rancher-monitoring-gitops.git'
-#    path: applicationsets
-    path: apps
+    path: applicationsets
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
