@@ -1,0 +1,12 @@
+cluster-template:
+  # cluster specific values
+  cluster:
+    # specify cluster name
+    name: "c-build-2"
+
+    # specify cluster labels
+    labels:
+      environmentId: dev
+      kyverno: dev
+
+  kubernetesVersion: "v1.23.10+rke2r1"
