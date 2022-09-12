@@ -6,7 +6,7 @@ cluster-template:
 
     # specify cluster labels
     labels:
-      environmentId: dev
+      environmentId: prod
       kyverno: prod
 
   kubernetesVersion: "v1.23.6+rke2r2"
