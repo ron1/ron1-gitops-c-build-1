@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: rke2-cluster-template
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ron1/ron1-gitops-c-build-1.git
+      revision: HEAD
+      directories:
+      - path: "cluster-templates/rke2-cluster-template/0.0.1/clusters/*"
+  template:
+    metadata:
+      name: rke2-cluster-template-{{path.basename}}
+      labels:
+        appset: rke2-cluster-template
+        app.kubernetes.io/name: rke2-cluster-template-{{path.basename}}
+      annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        version: '{{path[3]}}'
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - clusters/{{path.basename}}/values.yaml
+        repoURL: https://github.com/ron1/ron1-gitops-c-build-1.git
+        targetRevision: HEAD
+        path: '{{path}}/../..'
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+          - Validate=true
+          - PrunePropagationPolicy=foreground
+          - CreateNamespace=true
+          - PruneLast=true
+        retry:
+          limit: 2
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m

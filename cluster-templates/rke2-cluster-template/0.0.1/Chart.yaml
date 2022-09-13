@@ -27,6 +27,7 @@ keywords:
 - rke2-cluster-template
 - cluster-template
 - cluster-template-examples
+- cluster-templates
 
 dependencies:
 - name: cluster-template
