@@ -104,4 +104,3 @@ patches:
         clusterId: in-cluster-local
         clusterName: c-build-1
         environmentId: dev
-        kyverno: dev
